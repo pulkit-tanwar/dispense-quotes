@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/pulkit-tanwar/dispense-quotes/lib/quotes"
+	. "github.com/pulkit-tanwar/dispense-quotes/lib/quotes"
 	"github.com/urfave/cli"
 )
 
@@ -13,7 +13,7 @@ func main() {
 	app.Name = "dispenseQuotes"
 	app.Usage = "Dispense a random programming quote"
 	app.UsageText = "quotes dispense"
-	app.Version = quotes.Version
+	app.Version = Version
 
 	app.Commands = []cli.Command{
 		cli.Command{
@@ -32,6 +32,7 @@ func main() {
 }
 
 func DispenseQuote(c *cli.Context) error {
-	log.Print("TODO: Dispense Quotes")
+	q := NewQuote("Science is what we understand well enough to explain to a computer, Art is all the rest.	", "Donald Knuth")
+	log.Print(q)
 	return nil
 }

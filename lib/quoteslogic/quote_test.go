@@ -10,19 +10,19 @@ import (
 )
 
 func TestQuote(t *testing.T) {
-	q := NewQuote("Go is fun!", "Jack Black")
+	q := NewQuote("Go is fun!", "Jack Black.")
 	assert.Equal(t, "Go is fun!", q.Quote)
-	assert.Equal(t, "Jack Black", q.Author)
+	assert.Equal(t, "Jack Black.", q.Author)
 }
 
 func TestString(t *testing.T) {
-	q := NewQuote("Go is fun!", "Jack Black")
-	assert.Equal(t, "Go is fun!\n - Jack Black", q.String())
+	q := NewQuote("Go is fun.", "Jack Black")
+	assert.Equal(t, "Go is fun.\n - Jack Black", q.String())
 }
 
 func TestQuoteAsJson(t *testing.T) {
-	q := NewQuote("Go is fun!", "Jack Black")
-	expected := `{ "quote": "Go is fun!", "author": "Jack Black" }`
+	q := NewQuote("Go is fun", "Jack Black")
+	expected := `{ "quote": "Go is fun", "author": "Jack Black" }`
 
 	bytes, err := json.Marshal(q)
 	require.Nil(t, err)

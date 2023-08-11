@@ -3,6 +3,8 @@ package quoteslogic_test
 import (
 	"testing"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/pulkit-tanwar/dispense-quotes/lib/quoteslogic"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -42,7 +44,7 @@ func TestLoadQuotesFromInvalidFile(t *testing.T) {
 	d, err := quoteslogic.LoadQuotesFromJSONFile(filename)
 	assert.NotNil(t, err)
 	assert.Nil(t, d)
-	assert.Equal(t, "Error from ioutil.ReadFile: open someInvalidFile: no such file or directory", err.Error())
+	assert.Equal(t, "Error from os.ReadFile: open someInvalidFile: no such file or directory", err.Error())
 }
 
 func TestLoadQuotesFromInvalidJSONFile(t *testing.T) {
@@ -74,6 +76,8 @@ func TestDispenserRandomDistribution(t *testing.T) {
 			distribution[1]++
 		}
 	}
+	log.Println("distribution[0]: ", distribution[0])
+	log.Println("distribution[1]: ", distribution[1])
 	assert.True(t, distribution[0] > 40, "100 tests with 2 quotes should be close to 50 each, leaving a little wiggle room")
 	assert.True(t, distribution[1] > 40, "100 tests with 2 quotes should be close to 50 each, leaving a little wiggle room")
 }

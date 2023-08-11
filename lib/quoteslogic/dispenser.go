@@ -3,8 +3,8 @@ package quoteslogic
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"math/rand"
+	"os"
 )
 
 type Dispenser interface {
@@ -44,9 +44,9 @@ func (md *MemoryDispenser) RandomQuote() Quote {
 func LoadQuotesFromJSONFile(filename string) (Dispenser, error) {
 	quotes := []Quote{}
 
-	byteArray, err := ioutil.ReadFile(filename)
+	byteArray, err := os.ReadFile(filename)
 	if err != nil {
-		return nil, errors.New("Error from ioutil.ReadFile: " + err.Error())
+		return nil, errors.New("Error from os.ReadFile: " + err.Error())
 	}
 
 	err = json.Unmarshal(byteArray, &quotes)

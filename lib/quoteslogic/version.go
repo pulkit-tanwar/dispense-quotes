@@ -1,3 +1,3 @@
-package quotes
+package quoteslogic
 
 var Version = "latest"

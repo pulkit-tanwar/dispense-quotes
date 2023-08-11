@@ -1,10 +1,10 @@
-package quotes_test
+package quoteslogic_test
 
 import (
 	"encoding/json"
 	"testing"
 
-	. "github.com/pulkit-tanwar/dispense-quotes/lib/quotes"
+	. "github.com/pulkit-tanwar/dispense-quotes/lib/quoteslogic"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

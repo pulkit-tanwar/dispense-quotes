@@ -1,8 +1,13 @@
 COVERPROFILE=.cover.out
 COVERDIR=.cover
 PORT ?= 3000
+
 run:
 	@go run main.go dispense
+
+run-server:
+	@go run main.go serve
+
 
 dep:
 	@go get ./...

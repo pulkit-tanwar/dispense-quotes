@@ -5,6 +5,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
+	"github.com/pulkit-tanwar/dispense-quotes/lib/api"
 	"github.com/pulkit-tanwar/dispense-quotes/lib/config"
 	"github.com/pulkit-tanwar/dispense-quotes/lib/constants"
 	"github.com/pulkit-tanwar/dispense-quotes/lib/quoteslogic"
@@ -88,5 +89,20 @@ func RunHTTPServer(c *cli.Context) error {
 	log.Infof("HOST: %s", cfg.Host)
 	log.Infof("PORT: %d", cfg.Port)
 	log.Infof("API_PATH: %s", cfg.APIPath)
+
+	dispenser, err := quoteslogic.LoadQuotesFromJSONFile("quotes.json")
+	if err != nil {
+		log.Print("Error occured while fetching quotes from the json file: ", err)
+		os.Exit(1)
+	}
+
+	srv := api.NewServer(cfg, dispenser)
+
+	err = srv.Start()
+	if err != nil {
+		log.Errorf("Error while starting server. Error: %s", err.Error())
+		os.Exit(1)
+	}
+
 	return nil
 }
